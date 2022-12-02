@@ -1,0 +1,298 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block title %}
+    All jobs
+{% endblock %}
+
+{% block content %}
+
+<!-- search function -->
+<body>
+    <div class="hero_area">
+        <!-- header section strats -->
+        <header class="header_section">
+          <div class="container-fluid">
+            <nav class="navbar navbar-expand-lg custom_nav-container ">
+              <a class="navbar-brand" href="{% url 'jobs:home' %}">
+                <img src="{% static 'images/hirevac_white.png' %}" width="50px" alt="">
+                <span class="m-2">
+                  Hirevac
+                </span>
+              </a>
+    
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class=""> </span>
+              </button>
+    
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav  ml-auto">
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'jobs:home' %}">Home</a>
+                  </li>
+                  <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'jobs:about' %}"> About</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Jobs and Search</a>
+                  </li>
+                  {% if request.user.is_authenticated and request.user.role == 'employer' %}
+                    <li class="nav-item dropdown">
+                        <a id="clientZone" href="#" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false"
+                        class="nav-link dropdown-toggle has-img mb-3 mb-lg-0 mt-3 mt-lg-0">
+                            <!-- company img to be continued... -->
+                            {% if request.user.role == 'employee' %}
+                                {{ request.user.first_name }} {{ request.user.last_name }}
+                            {% else %}
+                                {{ request.user.first_name }}
+                            {% endif %}
+                        </a>
+                        <div aria-labelledby="clientZone" class="dropdown-menu">
+                            <a href="{% url 'jobs:employer-dashboard' %}" class="dropdown-item">Dashboard</a>
+                            <a href="{% url 'jobs:employer-all-applicants' %}" class="dropdown-item">Applicants </a>
+                            <a href="{% url 'jobs:employer-jobs-create' %}" class="dropdown-item">Post a new
+                                job </a>
+                            <a href="{% url 'accounts:logout' %}" class="dropdown-item">Logout</a>
+                        </div>
+                    </li>
+                {% elif request.user.is_authenticated and request.user.role == 'employee' %}
+                    <li class="nav-item dropdown">
+                        <a id="clientZone" href="#" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false"
+                        class="nav-link dropdown-toggle has-img mb-3 mb-lg-0 mt-3 mt-lg-0">
+                            <!-- company img to be continued... -->
+                            {% if request.user.role == 'employee' %}
+                                {{ request.user.first_name }} {{ request.user.last_name }}
+                            {% else %}
+                                {{ request.user.first_name }}
+                            {% endif %}
+                        </a>
+                        <div aria-labelledby="clientZone" class="dropdown-menu">
+                            <a href="{% url 'accounts:employer-profile-update' %}" class="dropdown-item">Edit Profile</a>
+                            <a href="{% url 'accounts:logout' %}" class="dropdown-item">Logout</a>
+                        </div>
+                    </li>
+                {% else %}
+                    <li class="nav-item dropdown">
+                        <a id="pages" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                        class="nav-link dropdown-toggle">Register
+                        </a>
+                        <div aria-labelledby="pages" class="dropdown-menu">
+                            <a href="{% url 'accounts:employee-register' %}" class="dropdown-item">Applicant</a>
+                            <a href="{% url 'accounts:employer-register' %}" class="dropdown-item">Employer</a>
+                        </div>
+                    </li>
+                    <li class="nav-item" style="color: #fff">
+                        <a href="{% url 'accounts:login' %}" class="btn navbar-btn btn-outline-light mb-5 mb-lg-0 px-4">
+                            Login
+                        </a>
+                    </li>
+                {% endif %}
+                </ul>
+              </div>
+            </nav>
+          </div>
+        </header>
+        <!-- end header section -->
+        <!-- slider section -->
+        <section class="slider_section">
+            <div class="container ">
+            <div class="row">
+                <div class="col-lg-7 col-md-8 mx-auto">
+                <div class="detail-box">
+                    <h1 style="font-size: 55px;">
+                    Build Your <br>
+                    POWERFUL CAREER
+                    </h1>
+                    <p style="font-size: 20px;">
+                    when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal
+                    distribution of letters, as opposed to
+                    </p>
+                </div>
+                </div>
+            </div>
+            <!-- start of search bar-->
+            <section class="job-form-section job-form-section--compressed">
+                <div class="container">
+                    <div class="find_container">
+                    <form id="job-main-form" method="get" action="#" class="job-main-form">
+                        <div class="controls">
+                            <div class="row">
+                                <div class="form-group col-lg-5">
+                                    <input type="text" id="position" name="position"
+                                            placeholder="Enter Job Position." class="form-control">
+                                </div>
+                                <div class="form-group col-lg-4">
+                                    <input type="text" id="location" name="location" placeholder="Enter a location."
+                                            value="" class="form-control">
+                                </div>
+                                <div class="btn-box form-group col-lg-3">
+                                    <button type="submit" name="name"
+                                            class="btn btn-outline-white-primary job-main-form__button">
+                                        <i class="fa fa-search"></i> Search Now
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-lg-5">
+                                    <label for="category" class="text-white">Sepcialization: </label>
+                                    <select type="text" id="category" name="category" class="form-control">
+                                        <option value="">---</option>
+                                        <option value="web-development">Web Developer</option>
+                                        <option value="web-design">Web Designer</option>
+                                        <option value="graphic-design">Graphic Designer</option>
+                                        <option value="android">Android Developer</option>
+                                        <option value="support">Tech Support</option>
+                                        <option value="human-resources">Human Resources</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-lg-3">
+                                    <label for="number" class="text-white">Salary:</label>
+                                    <input type="number" id="salary" name="salary" placeholder="Enter Salary."
+                                            value="" class="form-control">
+                                </div>
+                                <div class="form-group col-lg-4">
+                                    <label for="category" class="text-white">Job Type:</label>
+                                    <select type="text" id="type" name="type" class="form-control">
+                                        <option value="">---</option>
+                                        <option value="1">Full Time</option>
+                                        <option value="2">Part Time</option>
+                                        <option value="3">Internship</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+            </section>
+            <!-- end of search bar -->
+            </div>
+            </div>
+        </section>
+        <!-- end slider section -->
+    </div>
+<div>
+
+<!-- search results -->
+<!-- job section -->
+<section class="job_section layout_padding">
+    <div class="container">
+      <div class="heading_container heading_center">
+        <h2>
+          SEARCH RESULTS
+        </h2>
+      </div>
+      <div class="job_container">
+        <h4 class="job_heading">
+          List of Job Postings
+        </h4>
+        <br>
+        <h5 class="heading">
+            Number of results: <span style="font-weight: bold;">{{ jobs.count }}</span>
+        </h5>
+        <!-- python -->
+        {% for job in jobs %}
+        <div class="job-listing">
+            <div class="row">
+            <div class="col-lg-12">
+                <div class="box">
+                <div class="job_content-box">
+                    {% comment %} 
+                    <div class="img-box">
+                        <img src="{% static 'images/hirevac.png' %}" alt="">
+                    </div> 
+                    {% endcomment %}
+                    <div class="detail-box">
+                    <h5 class="job__title">
+                        <a href="{% url 'jobs:jobs-detail' job.id %}" style="color: orangered;">{{ job.title }}</a>
+                    </h5>
+                    <div class="detail-info">
+                        <h6>
+                        <i class="fa fa-map-marker" aria-hidden="true"></i>
+                        <span style="font-weight: bold;">
+                            {{ job.location }}
+                        </span>
+                        </h6>
+                        <h6>
+                        <i class="fa fa-money" aria-hidden="true"></i>
+                        <span>
+                          {% load humanize %}
+                            ₱ {{job.salary|intcomma}}
+                        </span>
+                        </h6>
+                    </div>
+                    <div class="description">
+                        <div class="col-10 col-md-3 col-lg-12 ml-auto">
+                            <p>Posted {{ job.created_at|timesince }}</p>
+                        </div>
+                        <div class="col-10 col-md-3 col-lg-12 ml-auto">
+                            
+                            Description: <p>{{ job.description|slice:":500" }}...</p>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <div class="option-box">
+                    <button class="fav-btn">
+                    <i class="fa fa-heart-o" aria-hidden="true"></i>
+                    </button>
+                    <a href="" class="apply-btn">
+                    Apply Now
+                    </a>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% if is_paginated %}
+                <div class="row">
+                    <div class="col-md-12">
+                        <nav aria-label="Page navigation example" class="d-flex justify-content-center mt-4 mb-4">
+                            <ul class="pagination">
+                                {% if page_obj.has_previous %}
+                                    <li class="page-item">
+                                        <a href="?page={{ page_obj.previous_page_number }}"
+                                           class="page-link">&laquo;</a>
+                                    </li>
+                                {% else %}
+                                    <li class="page-item disabled">
+                                        <a class="page-link">&laquo;</a>
+                                    </li>
+                                {% endif %}
+                                {% for i in page_obj.paginator.page_range %}
+                                    {% if page_obj.number == i %}
+                                        <li class="page-item active">
+                                            <a class="page-link">{{ i }}</a>
+                                        </li>
+                                    {% else %}
+                                        <li class="page-item">
+                                            <a href="?page={{ i }}" class="page-link">{{ i }}</a>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                                {% if page_obj.has_next %}
+                                    <li class="page-item">
+                                        <a href="?page={{ page_obj.next_page_number }}" class="page-link">&raquo;</a>
+                                    </li>
+                                {% else %}
+                                    <li class="page-item disabled">
+                                        <a class="page-link">&raquo;</a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+<!-- end job section -->
+
+
+
+
+
+{% endblock %}

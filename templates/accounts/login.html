@@ -1,0 +1,58 @@
+{% extends 'hirevac.html' %}
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/backgroundstyle.css' %}" rel="stylesheet">
+
+{% block content %}
+
+<section class="login-all">
+    <div class="col-sm-6 offset-sm-3 shadow p-5" style="margin-top: 125px; margin-bottom: 125px;">
+        <div class="box">
+            <div class="mb-3">
+                <div class="mb-4 ">
+                    <img src="{% static 'images/hirevac_black.png' %}" width="100px" alt="" class="my-3" style="display: block; margin-left: auto; margin-right: auto;">
+                      <h1 class="text-center" style=" padding-top: 10px;color: black;"><span style="font-weight: bold;">Log in</span> and start browsing!</h1>
+                      <h6 class="text-center pb-4" style=" padding-top: 10px;">Sign in now to browse latest job listings and applications.</h6>
+                  </div>
+            </div>
+            {% if form.errors %}
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <div class="alert alert-danger alert-dismissable">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <strong>{{ error|escape }}</strong>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                    <div class="alert alert-danger alert-dismissable">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <form action="" method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="form-group">
+                        <label for="id_{{ field.name }}">{{ field.label }}</label>
+                        <input type="{{ field.field.widget.input_type }}"
+                               class="form-control"
+                               name="{{ field.name }}"
+                               id="id_{{ field.name }}"
+                               placeholder="{{ field.field.widget.attrs.placeholder }}">
+                    </div>
+                {% endfor %}
+                <div class="text-center">
+                    <button type="submit" class="btn btn-outline-white-primary" style="width: 50%; height: 55px; background-color: #fff; border-color: black; border-style: solid; font-weight: bold;"><i class="fa fa-sign-in"></i> Log in
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

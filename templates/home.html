@@ -1,0 +1,388 @@
+{% extends 'base.html' %}
+{% load static %}
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet">
+  <!-- font awesome style -->
+  <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet">
+  <!-- nice select -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/{% static 'css/nice-select.min.css' %}" integrity="sha256-mLBIhmBvigTFWPSCtvdu6a76T+3Xyt+K571hupeFLg4=" crossorigin="anonymous" />
+  <!-- styles for this template -->
+  <link href="{% static 'css/style.css' %}" rel="stylesheet">
+  <!-- responsive style -->
+  <link href="{% static 'css/responsive.css' %}" rel="stylesheet">
+  <!-- home stylesheet -->
+  <link rel="stylesheet" href="{% static 'css/home.css' %}" rel="stylesheet">
+{% block title %}
+    Home
+{% endblock %}
+
+{% block content %}
+
+<div id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
+class="modal fade">
+<div role="document" class="modal-dialog">
+   <div class="modal-content">
+       <div class="modal-header">
+           <h4 id="exampleModalLabel" class="modal-title">Customer Login</h4>
+           <button type="button" data-dismiss="modal" aria-label="Close" class="close">
+               <span aria-hidden="true">×</span>
+           </button>
+       </div>
+       <div class="modal-body">
+           <form action="" method="post">
+               <div class="form-group">
+                   <input id="email_modal" type="text" placeholder="email" class="form-control">
+               </div>
+               <div class="form-group">
+                   <input id="password_modal" type="password" placeholder="password" class="form-control">
+               </div>
+               <p class="text-center">
+                   <button type="button" class="btn btn-outline-white-primary"><i class="fa fa-sign-in"></i>
+                       Log in
+                   </button>
+               </p>
+           </form>
+           <p class="text-center text-muted">Not registered yet?</p>
+           <p class="text-center text-muted"><a href="client-register.html"><strong>Register now</strong></a>!</p>
+       </div>
+   </div>
+</div>
+</div>
+<!-- *** LOGIN MODAL END ***-->
+
+<!-- category section -->
+<section class="category_section">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-6 col-md-4 col-xl-2 px-0">
+          <a href="search?position=&location=&name=&type=&category=web-design&salary=#" class="box">
+            <div class="img-box">
+              <img src="{% static 'images/c1.png' %}" alt="">
+            </div>
+            <div class="detail-box">
+              <h5>
+                Web Designer
+              </h5>
+            </div>
+          </a>
+        </div>
+        <div class="col-sm-6 col-md-4 col-xl-2 px-0">
+          <a href="search?position=&location=&name=&type=&category=web-development&salary=#" class="box">
+            <div class="img-box">
+              <img src="{% static 'images/c2.png' %}" alt="">
+            </div>
+            <div class="detail-box">
+              <h5>
+                Web Developer
+              </h5>
+            </div>
+          </a>
+        </div>
+        <div class="col-sm-6 col-md-4 col-xl-2 px-0">
+          <a href="search?position=&location=&name=&type=&category=graphic-design&salary=#" class="box">
+            <div class="img-box">
+              <img src="{% static 'images/c3.png' %}" alt="">
+            </div>
+            <div class="detail-box">
+              <h5>
+                Graphic Designer
+              </h5>
+            </div>
+          </a>
+        </div>
+        <div class="col-sm-6 col-md-4 col-xl-2 px-0">
+          <a href="search?position=&location=&name=&type=&category=android&salary=#" class="box">
+            <div class="img-box">
+              <img src="{% static 'images/c4.png' %}" alt="">
+            </div>
+            <div class="detail-box">
+              <h5>
+                Android Developer
+              </h5>
+            </div>
+          </a>
+        </div>
+        <div class="col-sm-6 col-md-4 col-xl-2 px-0">
+          <a href="search?position=&location=&name=&type=&category=support&salary=#" class="box">
+            <div class="img-box">
+              <img src="{% static 'images/c5.png' %}" alt="">
+            </div>
+            <div class="detail-box">
+              <h5>
+                Tech Support
+              </h5>
+            </div>
+          </a>
+        </div>
+        <div class="col-sm-6 col-md-4 col-xl-2 px-0">
+          <a href="search?position=&location=&name=&type=&category=human-resources&salary=#" class="box">
+            <div class="img-box">
+              <img src="{% static 'images/c6.png' %}" alt="">
+            </div>
+            <div class="detail-box">
+              <h5>
+                Human Resources
+              </h5>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- end category section -->
+
+</section>
+    <section class="job_section layout_padding">
+        <div class="container">
+            <div class="heading_container heading_center">
+                <h2 class="pb-5">
+                  FEATURED JOBS
+                </h2>
+              </div>
+            <div class="row featured align-items-stretch">
+                {% for job in jobs %}
+                    <div class="col-lg-5 mb-5 mb-lg-0" style="border-style: solid;border-width: 1px; padding: 20px; margin: 45px; border-radius: 10px;">
+                        <div class="box-image-text bg-visible full-height">
+                            <div class="top">
+                                <a href="{% url 'jobs:jobs-detail' job.id %}">
+                                    <div class="image">
+                                        <img src="{% static 'images/meeting.png' %}" alt="" class="img-fluid" style="border-radius: 20px;">
+                                    </div>
+                                    <div class="bg"></div>
+                                </a>
+                            </div>
+                            <div class="content">
+                                <h5 class="pt-4">
+                                  <a href="{% url 'jobs:jobs-detail' job.id %}" style="color: orangered; font-weight: bold;">
+                                    {{ job.title }}
+                                  </a>
+                                </h5>
+                                <p class="featured__details"><i class="fa fa-map-marker job__location"></i>
+                                    {{ job.location }}
+                                    {% if job.type == '1' %}
+                                        <span class="badge featured-badge badge-success">Full time</span>
+                                    {% elif job.type == '2' %}
+                                        <span class="badge featured-badge badge-primary">Part time</span>
+                                    {% else %}
+                                        <span style="color: #ffffff;" class="badge featured-badge badge-warning">Internship</span>
+                                    {% endif %}
+                                </p>
+                                <p>{{ job.description|slice:":400" }}...</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- RECENT JOBS -->
+    <section class="category_section py-5">
+        <div class="container">
+            <div class="heading_container heading_center">
+                <h2 class="pb-5">
+                  JOBS POSTED THIS MONTH
+                </h2>
+              </div>
+            {% for trending in trendings %}
+                <div class="job-listing  job-listing--last">
+                    <div class="row" style="border-style: solid; border-width: 1px; border-radius: 10px; margin: 20px; padding: 20px;">
+                        <div class="col-md-12 col-lg-6">
+                            <div class="row">
+                                <div class="col-2">
+                                    <img src="{% static 'images/hirevac_black.png' %}"
+                                         alt="ShareBoardd " class="img-fluid">
+                                </div>
+                                <div class="col-10">
+                                    <h4 class="job__title">
+                                        <a href="{% url 'jobs:jobs-detail' trending.id %}">{{ trending.title }}</a>
+                                    </h4>
+                                    <p class="job__company">
+                                        {{ trending.company_name }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-10 col-md-3 col-lg-2 ml-auto"><i class="fa fa-map-marker job__location"></i>
+                            {{ trending.location }}
+                        </div>
+                        <div class="col-10 col-md-3 col-lg-3 ml-auto">
+                            <p>Posted {{ trending.created_at|timesince }}</p>
+                        </div>
+                        <div class="col-sm-12 col-md-2 col-lg-1">
+                            <div class="job__star">
+                                <a href="#" data-toggle="tooltip" data-placement="top"
+                                   title="Save to favourites" class="job__star__link">
+                                    <i class="fa fa-star"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+    <section style="background-image: url({% static 'images/startup.jpg' %}); " class="section-divider">
+        <div class="overlay"></div>
+    </section>
+
+ <!-- expert section -->
+
+ <section class="expert_section layout_padding">
+    <div class="container">
+      <div class="heading_container heading_center">
+        <h2>
+          LOOKING FOR EXPERTS?
+        </h2>
+        <p>
+          Lorem ipsum dolor sit amet, non odio tincidunt ut ante, lorem a euismod suspendisse vel, sed quam nulla mauris
+          iaculis. Erat eget vitae malesuada, tortor tincidunt porta lorem lectus.
+        </p>
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-lg-4 mx-auto">
+          <div class="box">
+            <div class="img-box">
+              <img src="{% static 'images/e1.jpg' %}" alt="">
+            </div>
+            <div class="detail-box">
+              <a href="">
+                Martin Anderson
+              </a>
+              <h6 class="expert_position">
+                <span>
+                  Web Anaylzer
+                </span>
+                <span>
+                  41 Jobs Done
+                </span>
+              </h6>
+              <span class="expert_rating">
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+              </span>
+              <p>
+                Lorem ipsum dolor sit amet, non odio tincidunt ut ante, lorem a euismod suspendisse vel, sed quam
+                nulla
+                mauris iaculis.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mx-auto">
+          <div class="box">
+            <div class="img-box">
+              <img src="{% static 'images/e2.jpg' %}" alt="">
+            </div>
+            <div class="detail-box">
+              <a href="">
+                Semanta Klores
+              </a>
+              <h6 class="expert_position">
+                <span>
+                  Graphic Designer
+                </span>
+                <span>
+                  32 Jobs Done
+                </span>
+              </h6>
+              <span class="expert_rating">
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+              </span>
+              <p>
+                Lorem ipsum dolor sit amet, non odio tincidunt ut ante, lorem a euismod suspendisse vel, sed quam
+                nulla
+                mauris iaculis.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mx-auto">
+          <div class="box">
+            <div class="img-box">
+              <img src="{% static 'images/e3.jpg' %}" alt="">
+            </div>
+            <div class="detail-box">
+              <a href="">
+                Ryan Martines
+              </a>
+              <h6 class="expert_position">
+                <span>
+                  SEO Expert
+                </span>
+                <span>
+                  27 Jobs Done
+                </span>
+              </h6>
+              <span class="expert_rating">
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+              </span>
+              <p>
+                Lorem ipsum dolor sit amet, non odio tincidunt ut ante, lorem a euismod suspendisse vel, sed quam
+                nulla
+                mauris iaculis.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="btn-box">
+        <a href="">
+          View All Freelancers
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- end expert section -->
+
+  <!-- about section -->
+  <section class="about_section layout_padding">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="detail-box">
+            <div class="heading_container">
+              <h2>
+                About Us
+              </h2>
+            </div>
+            <p>
+              Normal distribution of letters, as opposed to using 'Content here, content here', making it look like
+              readable English. Many desktop publishing packages and web page editors has a more-or-less normal
+              distribution of letters, as opposed to using 'Content here, content here', making it look like readable
+              English. Many desktop publishing packages and web page editors
+            </p>
+            <a href="{% url 'jobs:about' %}">
+              Read More
+            </a>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="img-box">
+            <img src="{% static 'images/about-img.jpg' %}" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- end about section -->
+
+
+  {% include 'reviews.html' %}
+
+{% endblock %}

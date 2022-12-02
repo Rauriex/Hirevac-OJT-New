@@ -1,0 +1,305 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{% block title %} {% endblock %} - Django Jobs</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet"
+          href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet"
+          href="{% static 'vendor/font-awesome/css/font-awesome.min.css' %}">
+    <!-- Google fonts - Roboto for copy, Montserrat for headings-->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,700">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Montserrat:400,700">
+    <!-- owl carousel-->
+    <link rel="stylesheet"
+          href="{% static 'vendor/owl.carousel/assets/owl.carousel.css' %}">
+    <link rel="stylesheet"
+          href="{% static 'vendor/owl.carousel/assets/owl.theme.default.css' %}">
+    <!-- fonts style -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet">
+    <!-- font awesome style -->
+    <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet" />
+    <!-- nice select -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/{% static 'css/nice-select.min.css' %}" integrity="sha256-mLBIhmBvigTFWPSCtvdu6a76T+3Xyt+K571hupeFLg4=" crossorigin="anonymous" />
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="{% static 'css/responsive.css' %}" rel="stylesheet" />
+    {% block styles %}{% endblock %}
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="favicon.png">
+    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+</head>
+
+<style>
+  .btn-search-home button.btn {
+    display: inline-block;
+    padding: 10px 45px;
+    background-color: #e41a2b;
+    color: #ffffff;
+    border-radius: 5px;
+    -webkit-transition: all .3s;
+    -o-transition: all .3s;
+    -moz-transition: all .3s;
+    transition: all .3s;
+    border: 1px solid #e41a2b;
+    outline: none;
+    text-transform: uppercase;
+  }
+  
+  .btn-search-home button.btn:hover {
+    background-color: transparent;
+    color: #e41a2b;
+  }
+
+</style>
+
+<body>
+    <div class="hero_area">
+        <!-- header section strats -->
+        <header class="header_section">
+          <div class="container-fluid">
+            <nav class="navbar navbar-expand-lg custom_nav-container ">
+              <a class="navbar-brand" href="{% url 'jobs:home' %}">
+                <img src="{% static 'images/hirevac_white.png' %}" width="50px" alt="">
+                <span class="m-2">
+                  Hirevac
+                </span>
+              </a>
+    
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class=""> </span>
+              </button>
+    
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav  ml-auto">
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'jobs:home' %}">Home</a>
+                  </li>
+                  <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'jobs:about' %}"> About</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="search?position=&location=&name=&type=&category=&salary=#">Jobs and Search</a>
+                  </li>
+                  {% if request.user.is_authenticated and request.user.role == 'employer' %}
+                    <li class="nav-item dropdown">
+                        <a id="clientZone" href="#" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false"
+                        class="nav-link dropdown-toggle has-img mb-3 mb-lg-0 mt-3 mt-lg-0">
+                            <!-- company img to be continued... -->
+                            {% if request.user.role == 'employee' %}
+                                {{ request.user.first_name }} {{ request.user.last_name }}
+                            {% else %}
+                                {{ request.user.first_name }}
+                            {% endif %}
+                        </a>
+                        <div aria-labelledby="clientZone" class="dropdown-menu">
+                            <a href="{% url 'jobs:employer-dashboard' %}" class="dropdown-item">Dashboard</a>
+                            <a href="{% url 'jobs:employer-all-applicants' %}" class="dropdown-item">Applicants </a>
+                            <a href="{% url 'jobs:employer-jobs-create' %}" class="dropdown-item">Post a new
+                                job </a>
+                            <a href="{% url 'accounts:logout' %}" class="dropdown-item">Logout</a>
+                        </div>
+                    </li>
+                {% elif request.user.is_authenticated and request.user.role == 'employee' %}
+                    <li class="nav-item dropdown">
+                        <a id="clientZone" href="#" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false"
+                        class="nav-link dropdown-toggle has-img mb-3 mb-lg-0 mt-3 mt-lg-0">
+                            <!-- company img to be continued... -->
+                            {% if request.user.role == 'employee' %}
+                                {{ request.user.first_name }} {{ request.user.last_name }}
+                            {% else %}
+                                {{ request.user.first_name }}
+                            {% endif %}
+                        </a>
+                        <div aria-labelledby="clientZone" class="dropdown-menu">
+                            <a href="{% url 'accounts:employer-profile-update' %}" class="dropdown-item">Edit Profile</a>
+                            <a href="{% url 'accounts:logout' %}" class="dropdown-item">Logout</a>
+                        </div>
+                    </li>
+                {% else %}
+                    <li class="nav-item dropdown">
+                        <a id="pages" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                        class="nav-link dropdown-toggle">Register
+                        </a>
+                        <div aria-labelledby="pages" class="dropdown-menu">
+                            <a href="{% url 'accounts:employee-register' %}" class="dropdown-item">Applicant</a>
+                            <a href="{% url 'accounts:employer-register' %}" class="dropdown-item">Employer</a>
+                        </div>
+                    </li>
+                    <li class="nav-item" style="color: #fff">
+                        <a href="{% url 'accounts:login' %}" class="btn navbar-btn btn-outline-light mb-5 mb-lg-0 px-4">
+                            Login
+                        </a>
+                    </li>
+                {% endif %}
+                </ul>
+              </div>
+            </nav>
+          </div>
+        </header>
+        <!-- end header section -->
+        <!-- slider section -->
+    <section class="slider_section ">
+      <div class="container ">
+        <div class="row">
+          <div class="col-lg-7 col-md-8 mx-auto">
+            <div class="detail-box">
+              <h1 style="font-size: 60px;">
+                Build Your <br>
+                POWERFUL CAREER
+              </h1>
+              <p style="font-size: 20px;">
+                when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal
+                distribution of letters, as opposed to
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="btn-search-home btn col-lg-12">
+          <a href="search?position=&location=&name=&type=&category=&salary=#">
+            <button type="submit" name="name" 
+                  class="btn job-main-form__button">
+              <i class="fa fa-search"></i> Search Now
+            </button>
+          </a>
+        </div>
+      </div>
+    </section>
+    </div>
+
+<div>
+    {% if messages %}
+
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+{#            <li{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{{ message }}</li>#}
+        {% endfor %}
+
+    {% endif %}
+    {% block content %} {% endblock %}
+</div>
+
+<!-- footer section start -->
+<section class="info_section ">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-2 info_links">
+          <h4>
+            Menu
+          </h4>
+          <ul>
+            <li class="active">
+              <a href="{% url 'jobs:home' %}">
+                Home
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'jobs:about' %}">
+                About
+              </a>
+            </li>
+            <li>
+              <a href="search?position=&location=&name=&type=&category=web-development&salary=#">
+                Jobs and Search
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <h4>
+            Jobs
+          </h4>
+          <p>
+            Established fact that a reader will be distracted by the readable content of a page when looking at its
+            layout. The point of using Lorem Ipsum
+          </p>
+        </div>
+        <div class="col-md-3">
+          <div class="info_social">
+            <h4>
+              Social Link
+            </h4>
+            <div class="social_container">
+              <div>
+                <a href="">
+                  <i class="fa fa-facebook" aria-hidden="true"></i>
+                </a>
+              </div>
+              <div>
+                <a href="">
+                  <i class="fa fa-twitter" aria-hidden="true"></i>
+                </a>
+              </div>
+              <div>
+                <a href="">
+                  <i class="fa fa-linkedin" aria-hidden="true"></i>
+                </a>
+              </div>
+              <div>
+                <a href="">
+                  <i class="fa fa-instagram" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="info_form">
+            <h4>
+              Newsletter
+            </h4>
+            <form action="">
+              <input type="text" placeholder="Enter Your Email" />
+              <button type="submit">
+                Subscribe
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- end info_section -->
+
+  <!-- footer section -->
+  <footer class="footer_section">
+    <div class="container">
+      <p>
+        &copy; <span id="displayYear"></span> All Rights Reserved By
+        Hirevac
+      </p>
+    </div>
+  </footer>
+  <!-- footer section -->
+
+<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'vendor/popper.js/umd/popper.min.js' %}"></script>
+<script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'vendor/jquery.cookie/jquery.cookie.js' %}"></script>
+<script src="{% static 'vendor/owl.carousel/owl.carousel.min.js' %}"></script>
+<script src="{% static 'vendor/bootstrap-select/js/bootstrap-select.min.js' %}"></script>
+<script src="{% static 'js/front.js' %}"></script>
+
+{% block javascripts %}{% endblock %}
+
+</body>
+
+</html>
