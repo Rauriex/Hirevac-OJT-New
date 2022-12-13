@@ -1,13 +1,4 @@
-asgiref==3.5.2
-distlib==0.3.6
-Django==4.1.4
-django-clearcache==1.2.1
-filelock==3.8.0
-gunicorn==20.1.0
-Pillow==9.2.0
-platformdirs==2.5.2
+Django==2.1.7
 pytz==2018.9
-sqlparse==0.4.3
-tzdata==2022.5
-virtualenv==20.16.5
 whitenoise==4.1.2
+gunicorn
