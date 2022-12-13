@@ -33,6 +33,8 @@
     <link href="{% static 'css/style.css' %}" rel="stylesheet" />
     <!-- responsive style -->
     <link href="{% static 'css/responsive.css' %}" rel="stylesheet" />
+    <!-- home stylesheet -->
+    <link href="{% static 'css/applicants.css' %}" rel="stylesheet">
     {% block styles %}{% endblock %}
     <!-- Favicon-->
     <link rel="shortcut icon" href="favicon.png">
@@ -142,7 +144,6 @@
             </div>
 {#            <li{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{{ message }}</li>#}
         {% endfor %}
-
     {% endif %}
     {% block content %} {% endblock %}
 </div>
@@ -173,7 +174,7 @@
             </li>
           </ul>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-5">
           <h4>
             Jobs
           </h4>
@@ -211,6 +212,7 @@
             </div>
           </div>
         </div>
+        {% comment %}
         <div class="col-md-4">
           <div class="info_form">
             <h4>
@@ -224,9 +226,10 @@
             </form>
           </div>
         </div>
+        {% endcomment %}
       </div>
     </div>
-  </section>
+</section>
   <!-- end info_section -->
 
   <!-- footer section -->

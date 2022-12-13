@@ -199,85 +199,87 @@
 
 <!-- footer section start -->
 <section class="info_section ">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-2 info_links">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2 info_links">
+        <h4>
+          Menu
+        </h4>
+        <ul>
+          <li class="active">
+            <a href="{% url 'jobs:home' %}">
+              Home
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'jobs:about' %}">
+              About
+            </a>
+          </li>
+          <li>
+            <a class="" href="search?position=&location=&name=&type=&category=&salary=#">
+              Jobs
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-5" style="margin-right: 70px;">
+        <h4>
+          Jobs
+        </h4>
+        <p>
+          Established fact that a reader will be distracted by the readable content of a page when looking at its
+          layout. The point of using Lorem Ipsum
+        </p>
+      </div>
+      <div class="col-md-4">
+        <div class="info_social">
           <h4>
-            Menu
+            Social Link
           </h4>
-          <ul>
-            <li class="active">
-              <a href="{% url 'jobs:home' %}">
-                Home
+          <div class="social_container">
+            <div>
+              <a href="">
+                <i class="fa fa-facebook" aria-hidden="true"></i>
               </a>
-            </li>
-            <li>
-              <a href="{% url 'jobs:about' %}">
-                About
+            </div>
+            <div>
+              <a href="">
+                <i class="fa fa-twitter" aria-hidden="true"></i>
               </a>
-            </li>
-            <li>
-              <a href="search?position=&location=&name=&type=&category=web-development&salary=#">
-                Jobs and Search
+            </div>
+            <div>
+              <a href="">
+                <i class="fa fa-linkedin" aria-hidden="true"></i>
               </a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-md-3">
-          <h4>
-            Jobs
-          </h4>
-          <p>
-            Established fact that a reader will be distracted by the readable content of a page when looking at its
-            layout. The point of using Lorem Ipsum
-          </p>
-        </div>
-        <div class="col-md-3">
-          <div class="info_social">
-            <h4>
-              Social Link
-            </h4>
-            <div class="social_container">
-              <div>
-                <a href="">
-                  <i class="fa fa-facebook" aria-hidden="true"></i>
-                </a>
-              </div>
-              <div>
-                <a href="">
-                  <i class="fa fa-twitter" aria-hidden="true"></i>
-                </a>
-              </div>
-              <div>
-                <a href="">
-                  <i class="fa fa-linkedin" aria-hidden="true"></i>
-                </a>
-              </div>
-              <div>
-                <a href="">
-                  <i class="fa fa-instagram" aria-hidden="true"></i>
-                </a>
-              </div>
+            </div>
+            <div>
+              <a href="">
+                <i class="fa fa-instagram" aria-hidden="true"></i>
+              </a>
             </div>
           </div>
         </div>
-        <div class="col-md-4">
-          <div class="info_form">
-            <h4>
-              Newsletter
-            </h4>
-            <form action="">
-              <input type="text" placeholder="Enter Your Email" />
-              <button type="submit">
-                Subscribe
-              </button>
-            </form>
-          </div>
+      </div>
+      {% comment %}
+      <div class="col-md-4">
+        <div class="info_form">
+          <h4>
+            Newsletter
+          </h4>
+          <form action="">
+            <input type="text" placeholder="Enter Your Email" />
+            <button type="submit">
+              Subscribe
+            </button>
+          </form>
         </div>
       </div>
+      {% endcomment %}
     </div>
-  </section>
-  <!-- end info_section -->
+  </div>
+</section>
+<!-- end info_section -->
 
   <!-- footer section -->
   <footer class="footer_section">

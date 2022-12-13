@@ -4,13 +4,16 @@
 {% endblock %}
 {% load static %}
 
+
 {% block content %}
 
     <section class="bg-light-gray">
         <div class="container">
             <div class="row">
-                <div class="col mx-auto py-5">
-                    <h1 class="heading">You are viewing all the applicants who have applied for your job position.</h1>
+                <div class="col mx-auto py-5 my-5" style="    
+                background-color: #030d87;
+                border-radius: 20px;">
+                    <h2 class="heading text-white offset-1">You are currently viewing <strong>all applicants</strong> who<br> have applied for your job listings.</h2>
                 </div>
             </div>
         </div>
@@ -19,13 +22,13 @@
         <div class="container">
             <div class="row">
                 {% for applicant in applicants %}
-                    <div class="col-lg-6">
+                    <div class="col-lg-5 applicante p-4" style="margin-left: 5%;">
                         <div class="box applicant">
-                            <h4>{{ applicant.user.get_full_name }}</h4>
-                            <p><strong>Applied position: {{ applicant.job.title }}</strong></p>
+                            <h4>Name: <span style="font-weight: bold;">{{ applicant.user.get_full_name }}</span></h4>
+                            <p>Applied position: <strong>{{ applicant.job.title }}</strong></p>
                             <a href="#" data-toggle="modal" data-target="#contact-modal"
                                class="btn btn-outline-white-secondary btn-sm">
-                                <i class="fa fa-envelope"></i>Contact
+                                <i class="fa fa-envelope"></i> Contact
                             </a>
                             <p>
                                 <span class="badge badge-info">Applied {{ applicant.created_at.astimezone }}</span>
@@ -82,7 +85,6 @@
                     </div>
                 {% else %}
                 <div class="py-5">
-                    <h3>Nothing to show as of the moment.</h3>
                 </div>
                 {% endif %}
             </div>

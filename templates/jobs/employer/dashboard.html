@@ -1,17 +1,68 @@
 {% extends 'hirevac.html' %}
 {% load static %}
+<link href="{% static 'css/style.css' %}" rel="stylesheet">
 {% block title %}
     Dashboard
 {% endblock %}
 
+
 {% block content %}
 
-    <section class="bg-light-gray py-5 my-1">
-        <div class="container">
-            <div class="row">
-                <h1 class="heading">Dashboard</h1>
-            </div>
+
+
+<div class="hero_area">
+    <!-- header section strats -->
+    <header class="header_section">
+      <div class="container-fluid">
+      </div>
+    </header>
+    <!-- end header section -->
+    <!-- slider section -->
+<section class="slider_section ">
+  <div class="container ">
+    <div class="row">
+      <div class="col-lg-7 col-md-8 mx-auto">
+        <div class="detail-box">
+          <h1 style="font-size: 60px;">
+            Dashboard <br>
+          </h1>
+          <p style="font-size: 20px;">
+            Welcome to your dashboard, {{user.first_name}}! You can view recent applicants and all your job listings here.
+          </p>
         </div>
+      </div>
+    </div>
+    <div class="btn-search-home btn col-lg-12">
+        <a href="search?position=&location=&name=&type=&category=&salary=#">
+          <button type="submit" name="name" 
+                class="btn job-main-form__button">
+            <i class="fa fa-search"></i> View subscription
+          </button>
+        </a>
+    </div>
+    <div class="btn-search-home btn col-lg-12">
+    </div>
+  </div>
+</section>
+</div>
+
+<div>
+{% if messages %}
+
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+{#            <li{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{{ message }}</li>#}
+    {% endfor %}
+
+{% endif %}
+</div>
+
+    <section class="bg-light-gray py-5 my-1">
     </section>
     <section>
         <div class="container">
