@@ -1,13 +1,5 @@
 .applicante {
-    border: 2px solid black;
+    border: 2px dashed black;
     border-radius: 20px;
     margin-bottom: 10%;
-}
-
-.header_applicant {
-    border-radius: 10px;
-    background-image: url(..images/b1.jpg);
-    background-repeat: no-repeat;
-    background-size: 100% 300%;
-    background-position: center;
 }
