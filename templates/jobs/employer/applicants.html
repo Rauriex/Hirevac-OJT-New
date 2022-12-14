@@ -6,25 +6,26 @@
 
 {% block content %}
 
-<section class="bg-light-gray">
-    <div class="container">
-        <div class="row">
-            <div class="col mx-auto py-5 my-5" style="    
-            background-color: #030d87;
-            border-radius: 20px;">
-                <h2 class="heading text-white offset-1">You are currently viewing applicants for the <br><strong>{{job.title}}</strong> position.</h2>
+    <section class="bg-light-gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <h1 class="heading">Applicants for the <span class="accent">{{ job.title }}</span> position</h1>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
     <section>
         <div class="container">
             <div class="row">
-                {% for applicant in applicants %}                    
-                    <div class="col-lg-5 applicante p-4" style="margin-left: 5%;">
+                {% for applicant in applicants %}
+                    <div class="col-lg-6">
                         <div class="box applicant">
-                            <h4>Name: <strong>{{ applicant.user.get_full_name }}</strong></h4>
-                            <h6>Contact: {{ request.user.email }}</strong></h6>
+                            <h4>{{ applicant.user.get_full_name }}</h4>
+                            <a href="#" data-toggle="modal" data-target="#contact-modal"
+                               class="btn btn-outline-white-secondary btn-sm">
+                                <i class="fa fa-envelope"></i>Contact
+                            </a>
                             <p>
                                 <span class="badge badge-info">Applied {{ applicant.created_at.astimezone }}</span>
                             </p>
@@ -38,7 +39,6 @@
                         </div>
                     </div>
                 {% endfor %}
-                <section class="col-lg-12">
                 {% if is_paginated %}
                     <div class="row">
                         <div class="col-md-12">
@@ -80,9 +80,8 @@
                         </div>
                     </div>
                 {% else %}
-                <p></p>
+                    <h3>You are end</h3>
                 {% endif %}
-            </section>
             </div>
         </div>
     </section>
