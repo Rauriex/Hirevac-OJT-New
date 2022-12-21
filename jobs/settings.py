@@ -120,7 +120,7 @@ USE_TZ = True
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
-ALLOWED_HOSTS = ['django-portal.herokuapp.com', 'localhost', '*', '.vercel.app', '.now.sh']
+ALLOWED_HOSTS = ['django-portal.herokuapp.com', 'localhost', '*', '.vercel.app', '.now.sh', 'hirevac-ojt-mef2sx3vr-rauriex.vercel.app']
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
