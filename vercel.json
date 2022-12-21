@@ -1,7 +1,7 @@
 {
     "builds": [{
         "src": "jobs/wsgi.py",
-        "use": "@natanffs/vercel-python-wsgi",
+        "use": "@vercel/node",
         "config": { "maxLambdaSize": "15mb", "runtime": "python3.9" }
     }],
     "routes": [
