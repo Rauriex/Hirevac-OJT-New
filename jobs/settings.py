@@ -25,6 +25,7 @@ SECRET_KEY = '@pzqp#x^+#(olu#wy(6=mi9&a8n+g&x#af#apn07@j=5oin=xb'
 DEBUG = True
 
 # Application definition
+# removed clear-cache (issue 12-21-22)
 
 INSTALLED_APPS = [
     'django.contrib.admin',
